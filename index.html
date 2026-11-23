@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>黄仁勋罪行生成器 · Jensen Crimes Generator</title>
+<meta name="description" content="复刻那个被下架的 meme 生成器：填几行字、拖两张图，一键生成「英伟达董事会调查发现，CEO黄仁勋……」式假新闻配图。纯前端，图片只留在你的浏览器里。">
+<meta name="theme-color" content="#0e0f12">
+<meta property="og:type" content="website">
+<meta property="og:title" content="黄仁勋罪行生成器">
+<meta property="og:description" content="填几行字、拖两张图，一键生成「英伟达董事会调查发现……」式假新闻配图。">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/900.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="panel">
+    <header class="panel__head">
+      <div class="brand">
+        <span class="brand__mark">J</span>
+        <div>
+          <h1>黄仁勋罪行生成器</h1>
+          <p>Jensen Crimes Generator</p>
+        </div>
+      </div>
+      <p class="lede">复刻那个被下架的 meme 站点。填文案、拖两张图，导出就是一张假新闻截图。</p>
+    </header>
+
+    <form class="form" id="form" autocomplete="off" onsubmit="return false">
+
+      <label class="field field--inline">
+        <span class="field__label">媒体名</span>
+        <input type="text" id="label" data-key="label" maxlength="24" spellcheck="false">
+      </label>
+
+      <label class="field">
+        <span class="field__label">标题 <em>自动换行，最多三行</em></span>
+        <textarea id="headline" data-key="headline" rows="3" maxlength="120"></textarea>
+      </label>
+
+      <label class="field">
+        <span class="field__label">引言 <em>会显示在标题下方</em></span>
+        <textarea id="quote" data-key="quote" rows="2" maxlength="120"></textarea>
+      </label>
+
+      <div class="grid2">
+        <label class="field">
+          <span class="field__label">署名句</span>
+          <input type="text" id="source" data-key="source" maxlength="60">
+        </label>
+        <label class="field">
+          <span class="field__label">日期</span>
+          <input type="text" id="date" data-key="date" maxlength="32" spellcheck="false">
+        </label>
+      </div>
+
+      <div class="field">
+        <span class="field__label">图片</span>
+        <div class="uploader">
+          <button type="button" class="upload" id="pickLeft">
+            <span class="upload__dot upload__dot--left"></span>
+            <span class="upload__text">
+              <b>左图</b>
+              <small id="leftName">黄仁勋（默认素材）</small>
+            </span>
+          </button>
+          <button type="button" class="upload" id="pickRight">
+            <span class="upload__dot upload__dot--right"></span>
+            <span class="upload__text">
+              <b>右图</b>
+              <small id="rightName">还没放图 · 点击或拖进来</small>
+            </span>
+          </button>
+        </div>
+        <input type="file" id="fileLeft" accept="image/*" hidden>
+        <input type="file" id="fileRight" accept="image/*" hidden>
+        <div class="minirow">
+          <button type="button" class="linkbtn" id="resetLeft">恢复默认左图</button>
+          <button type="button" class="linkbtn" id="clearRight">清空右图</button>
+        </div>
+      </div>
+
+      <details class="adv">
+        <summary>版式微调</summary>
+        <div class="adv__body">
+          <label class="field">
+            <span class="field__label">标题字号 <output id="sizeOut">自动</output></span>
+            <div class="range">
+              <input type="range" id="headlineSize" data-key="headlineSize" min="36" max="84" step="1">
+              <label class="check"><input type="checkbox" id="headlineAuto" checked> 自动适配</label>
+            </div>
+          </label>
+          <label class="field">
+            <span class="field__label">图片高度 <output id="heightOut">520</output></span>
+            <input type="range" id="imageHeight" data-key="imageHeight" min="320" max="820" step="10">
+          </label>
+          <label class="field">
+            <span class="field__label">左图宽度 <output id="ratioOut">44%</output></span>
+            <input type="range" id="leftRatio" data-key="leftRatio" min="28" max="68" step="2">
+          </label>
+          <label class="field">
+            <span class="field__label">标题字体</span>
+            <div class="segmented" id="fontSeg">
+              <button type="button" data-font="serif" class="is-on">宋体</button>
+              <button type="button" data-font="sans">黑体</button>
+            </div>
+          </label>
+        </div>
+      </details>
+
+      <div class="actions">
+        <button type="button" class="btn btn--primary" id="download">
+          <span>下载 PNG</span>
+        </button>
+        <button type="button" class="btn" id="copy">复制图片</button>
+        <button type="button" class="btn btn--ghost" id="random">随机来一条</button>
+        <button type="button" class="btn btn--ghost" id="share">分享链接</button>
+      </div>
+    </form>
+
+    <footer class="panel__foot">
+      <p>纯前端：图片和文字都只留在本机，不会上传到任何服务器。</p>
+      <p class="tiny">格式恶搞 · 请勿当作真实新闻传播 · 素材版权见仓库 CREDITS</p>
+    </footer>
+  </aside>
+
+  <main class="stage" id="stage">
+    <div class="frame" id="frame">
+      <canvas id="preview" aria-label="生成结果预览"></canvas>
+      <div class="frame__hint" id="hint">把游戏截图拖进来，或点右边按钮</div>
+    </div>
+    <div class="stage__bar">
+      <span id="tip">小技巧：Ctrl/⌘ + S 直接下载，Ctrl/⌘ + V 粘贴截图</span>
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><p style="padding:24px;font-family:sans-serif">这个页面需要 JavaScript 才能画出图片。</p></noscript>
+
+<script src="assets/presets.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
