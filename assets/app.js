@@ -8,7 +8,7 @@
 
   var DEFAULTS = {
     label: 'arknights',
-    headline: '英伟达董事会调查发现，CEO黄仁勋玩KARDS玩英日压槽',
+    headline: '英伟达董事会调查发现，CEO黄仁勋玩KARDS只玩英日压槽',
     quote: '“我们发现了黄仁勋的KARDS账号，让我们震惊的是，他在这款二战卡牌游戏中，坚持只玩英日压槽卡组”',
     source: '——一位明显受惊的英伟达高管说。',
     date: 'November 17, 2028',

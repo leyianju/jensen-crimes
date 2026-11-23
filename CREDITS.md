@@ -46,12 +46,13 @@
 
 ## 示例配图（assets/img/demo-kards.jpg）
 
-- 内容：**KARDS**（1939 Games 的二战卡牌游戏）里的「蒙哥马利 / Monty」卡牌原画
-- 原图：KARDS Wiki 的 `File:T monty.png`（1024×1024）
-- 出处：https://kards.fandom.com/wiki/Monty
-- 版权：卡牌美术归 **1939 Games** 所有，不属于本项目的开源部分
-- 改动：等比缩放到 1100px 宽，转 JPEG
-- 用途：只作为「右图」位置的默认示例，让页面打开就有东西看。**商用或公开发布请换成你自己的截图或获授权素材**
+- 内容：**KARDS**（1939 Games 的二战卡牌游戏）里的「蒙哥马利 / Monty」完整卡面（含 1K 费用角标、英国阵营标、卡名和卡牌效果）
+- 原图：Biligame KARDS wiki 的卡牌图（500×702 PNG）
+- 出处：https://wiki.biligame.com/kards/蒙哥马利
+- 卡面原画（无卡框版）：https://kards.fandom.com/wiki/Monty
+- 版权：卡牌美术与界面归 **1939 Games** 所有，不属于本项目的开源部分
+- 改动：卡面放大到 940px 高，居中合成到 1200×1040 的深色背景上（背景是卡面本身的模糊放大），转 JPEG
+- 用途：只作为「右图」位置的默认示例。**商用或公开发布请换成你自己的截图或获授权素材**
 
 ## 字体
 
