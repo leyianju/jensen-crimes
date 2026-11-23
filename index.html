@@ -60,27 +60,22 @@
       </div>
 
       <div class="field">
-        <span class="field__label">图片</span>
-        <div class="uploader">
-          <button type="button" class="upload" id="pickLeft">
-            <span class="upload__dot upload__dot--left"></span>
-            <span class="upload__text">
-              <b>左图</b>
-              <small id="leftName">黄仁勋（默认素材）</small>
-            </span>
-          </button>
-          <button type="button" class="upload" id="pickRight">
-            <span class="upload__dot upload__dot--right"></span>
-            <span class="upload__text">
-              <b>右图</b>
-              <small id="rightName">还没放图 · 点击或拖进来</small>
-            </span>
-          </button>
-        </div>
+        <span class="field__label">左图 · 黄仁勋 <em>点一张就换</em></span>
+        <div class="portraits" id="portraits"></div>
         <input type="file" id="fileLeft" accept="image/*" hidden>
+      </div>
+
+      <div class="field">
+        <span class="field__label">右图 · 配图 <em>拖进来 / 粘贴都行</em></span>
+        <button type="button" class="upload" id="pickRight">
+          <span class="upload__dot upload__dot--right"></span>
+          <span class="upload__text">
+            <b>选择截图</b>
+            <small id="rightName">还没放图 · 点击或拖进来</small>
+          </span>
+        </button>
         <input type="file" id="fileRight" accept="image/*" hidden>
         <div class="minirow">
-          <button type="button" class="linkbtn" id="resetLeft">恢复默认左图</button>
           <button type="button" class="linkbtn" id="clearRight">清空右图</button>
         </div>
       </div>
@@ -145,6 +140,7 @@
 <noscript><p style="padding:24px;font-family:sans-serif">这个页面需要 JavaScript 才能画出图片。</p></noscript>
 
 <script src="assets/presets.js"></script>
+<script src="assets/portraits.js"></script>
 <script src="assets/render.js"></script>
 <script src="assets/app.js"></script>
 </body>

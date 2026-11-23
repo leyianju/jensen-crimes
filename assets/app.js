@@ -16,11 +16,13 @@
     leftRatio: 0.44,
     headlineSize: 66,
     headlineAuto: true,
-    fontFamily: 'serif'
+    fontFamily: 'serif',
+    portrait: 'official'
   };
 
-  var DEFAULT_LEFT = 'assets/img/jensen.jpg';
+  var DEFAULT_PORTRAIT = 'official';
   var DEFAULT_RIGHT = 'assets/img/demo-game.jpg';
+  var PORTRAITS = window.PORTRAITS || [];
   var LS_KEY = 'jensen-crimes:v1';
 
   var $ = function (id) { return document.getElementById(id); };
@@ -45,6 +47,69 @@
     });
   }
 
+  function portraitById(id) {
+    for (var i = 0; i < PORTRAITS.length; i++) {
+      if (PORTRAITS[i].id === id) return PORTRAITS[i];
+    }
+    return null;
+  }
+
+  function buildPortraits() {
+    var box = $('portraits');
+    if (!box) return;
+    box.innerHTML = '';
+
+    PORTRAITS.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'portrait';
+      b.setAttribute('data-id', p.id);
+      b.title = p.name + ' — ' + (p.credit || '');
+      b.innerHTML = '<img src="' + p.thumb + '" alt="' + p.name + '" loading="lazy">' +
+                    '<span class="portrait__tag">' + p.name + '</span>';
+      b.addEventListener('click', function () { selectPortrait(p.id); });
+      box.appendChild(b);
+    });
+
+    var up = document.createElement('button');
+    up.type = 'button';
+    up.className = 'portrait portrait--upload';
+    up.title = '上传你自己的照片';
+    up.innerHTML = '<span class="portrait__plus">＋</span><span class="portrait__tag">上传</span>';
+    up.addEventListener('click', function () { $('fileLeft').click(); });
+    box.appendChild(up);
+  }
+
+  function markPortrait(id) {
+    document.querySelectorAll('.portrait[data-id]').forEach(function (el) {
+      el.classList.toggle('is-on', el.getAttribute('data-id') === id);
+    });
+  }
+
+  function selectPortrait(id, silent) {
+    var p = portraitById(id) || portraitById(DEFAULT_PORTRAIT) || PORTRAITS[0];
+    if (!p) return;
+    state.portrait = p.id;
+    markPortrait(p.id);
+    loadImage(p.src).then(function (im) {
+      imgs.left = im;
+      schedule();
+      if (!silent) {
+        saveLocal();
+        toast('左图换成「' + p.name + '」');
+      }
+    }).catch(function () {
+      if (!silent) toast('这张图加载失败了', true);
+    });
+  }
+
+  function flashPick(slot) {
+    var el = slot === 'left' ? document.querySelector('.portrait--upload') : $('pickRight');
+    if (!el) return;
+    el.classList.add('is-hit');
+    setTimeout(function () { el.classList.remove('is-hit'); }, 900);
+  }
+
   function handleFile(file, slot) {
     if (!file) return;
     if (!/^image\//.test(file.type)) { toast('这不是图片文件', true); return; }
@@ -52,17 +117,17 @@
     objectUrls.push(url);
     loadImage(url).then(function (im) {
       imgs[slot] = im;
-      $('leftName').textContent = slot === 'left' ? baseName(file.name) : $('leftName').textContent;
-      $('rightName').textContent = slot === 'right' ? baseName(file.name) : $('rightName').textContent;
-      if (slot === 'left') $('leftName').textContent = '自定义 · ' + baseName(file.name);
-      if (slot === 'right') $('rightName').textContent = '自定义 · ' + baseName(file.name);
-      $('hint').classList.add('is-hidden');
-      $('pick' + (slot === 'left' ? 'Left' : 'Right')).classList.add('is-hit');
-      setTimeout(function () {
-        $('pick' + (slot === 'left' ? 'Left' : 'Right')).classList.remove('is-hit');
-      }, 900);
+      if (slot === 'right') {
+        $('rightName').textContent = '自定义 · ' + baseName(file.name);
+        $('hint').classList.add('is-hidden');
+      } else {
+        state.portrait = 'custom';
+        markPortrait(null);
+        saveLocal();
+      }
+      flashPick(slot);
       schedule();
-      toast(slot === 'left' ? '左图已替换' : '右图已替换');
+      toast(slot === 'left' ? '左图已替换（自定义）' : '右图已替换');
     }).catch(function () {
       toast('读不出这张图，换一张试试', true);
     });
@@ -74,10 +139,7 @@
   }
 
   function loadDefaults() {
-    loadImage(DEFAULT_LEFT).then(function (im) {
-      imgs.left = im;
-      schedule();
-    }).catch(function () { /* 没有默认图就用占位 */ });
+    selectPortrait(state.portrait, true);
 
     loadImage(DEFAULT_RIGHT).then(function (im) {
       imgs.right = im;
@@ -199,7 +261,7 @@
   function sanitize(raw) {
     var out = {};
     if (!raw || typeof raw !== 'object') return out;
-    ['label', 'headline', 'quote', 'source', 'date', 'fontFamily'].forEach(function (k) {
+    ['label', 'headline', 'quote', 'source', 'date', 'fontFamily', 'portrait'].forEach(function (k) {
       if (typeof raw[k] === 'string') out[k] = raw[k].slice(0, 200);
     });
     if (typeof raw.headlineAuto === 'boolean') out.headlineAuto = raw.headlineAuto;
@@ -318,7 +380,6 @@
       });
     });
 
-    $('pickLeft').addEventListener('click', function () { $('fileLeft').click(); });
     $('pickRight').addEventListener('click', function () { $('fileRight').click(); });
     $('fileLeft').addEventListener('change', function (e) {
       handleFile(e.target.files && e.target.files[0], 'left');
@@ -327,15 +388,6 @@
     $('fileRight').addEventListener('change', function (e) {
       handleFile(e.target.files && e.target.files[0], 'right');
       e.target.value = '';
-    });
-
-    $('resetLeft').addEventListener('click', function () {
-      loadImage(DEFAULT_LEFT).then(function (im) {
-        imgs.left = im;
-        $('leftName').textContent = '黄仁勋（默认素材）';
-        schedule();
-        toast('左图已恢复默认');
-      }).catch(function () { toast('默认图加载失败', true); });
     });
 
     $('clearRight').addEventListener('click', function () {
@@ -428,6 +480,7 @@
 
     syncForm();
     bind();
+    buildPortraits();
     loadDefaults();
     schedule();
 

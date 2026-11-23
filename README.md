@@ -16,17 +16,19 @@
 - **所见即所得**：左边改字，右边画布立刻重排，导出的 PNG 和预览一模一样（2400px 宽，2x）
 - **标题自动适配**：三行以内自动找字号，长标题不会溢出、不会挤成蚂蚁字
 - **中文断行**：标点不落行首、英文单词不拆开、左括号不落行尾
-- **双图排版**：左图（默认是黄仁勋）+ 右图（你的游戏截图），高度和左右比例都能拖
+- **人物照片墙**：内置 5 张黄仁勋照片（官方笑脸照 / 斯坦福 / 侧脸 / 舞台 / 记者会），点一下换一张，也能传自己的
+- **双图排版**：左图（黄仁勋）+ 右图（你的游戏截图），高度和左右比例都能拖
 - **随手换图**：点击画布左/右半边、拖拽文件进去、Ctrl+V 直接粘贴截图
 - **随机文案**：内置 18 条现成段子，点一下换一条
-- **分享链接**：文案和版式参数全部压进 URL，发给朋友打开就是同一张图（图片不上传，用默认素材）
+- **分享链接**：文案、版式、选了哪张脸都压进 URL，发给朋友打开就是同一张图（图片不上传，用内置素材）
 - **快捷键**：`Ctrl/⌘ + S` 下载，`Ctrl/⌘ + V` 粘贴截图
 
 ## 怎么用
 
 1. 打开网页，左边改标题 / 引言 / 署名句 / 日期
-2. 点「右图」，选一张游戏截图（或者直接把图拖进画布）
-3. 点「下载 PNG」
+2. 「左图」那一排点一张黄仁勋，想用自己的就点「＋ 上传」
+3. 点「右图」，选一张游戏截图（或者直接把图拖进画布）
+4. 点「下载 PNG」
 
 标题里的 `CEO黄仁勋` 之后想加游戏名，直接写就行，会自动换行。
 想换"媒体名"（左上角那行红字）就改第一个输入框，`arknights`、`News-AI`、`Steam-AI` 之类都可以。
@@ -49,10 +51,11 @@ npx serve .
 | 想改什么 | 改哪里 |
 | --- | --- |
 | 内置段子 | `assets/presets.js`，往数组里加一条就行 |
+| 人物照片 | `assets/portraits.js` 加一条，图放 `assets/img/portraits/` |
 | 版式间距、字号 | `assets/render.js` 顶部的 `M` 常量（`top` / `headGap` / `quoteGap` …） |
 | 颜色、边距 | `assets/render.js` 里的 `C` 和 `PAD` |
 | 页面外观 | `assets/style.css` |
-| 默认素材 | 替换 `assets/img/jensen.jpg`、`assets/img/demo-game.jpg` |
+| 默认素材 | 替换 `assets/img/demo-game.jpg`，以及 `portraits/` 里对应的图 |
 
 渲染是手写 canvas，没有 html2canvas 这类库：预览和导出走同一个 `render()`，所以不会出现"预览好好的，导出错位"。
 
@@ -67,7 +70,10 @@ npx serve .
 ## 素材与版权
 
 - 代码：MIT
-- `assets/img/jensen.jpg`、`assets/img/demo-game.jpg`：来自 Wikimedia Commons，**CC BY-SA 4.0**，作者与出处见 [CREDITS.md](CREDITS.md)
+- `assets/img/portraits/` 里的 5 张黄仁勋照片：
+  - **official.jpg**（官方笑脸照）：NVIDIA 宣传照，沿用原站素材，**仅供恶搞二创**，不适用 CC 协议；介意的话删掉这一条即可
+  - 另外 4 张来自 Wikimedia Commons：CC0 / CC BY 2.0 / CC BY 4.0 / CC BY-SA 4.0，作者与出处见 [CREDITS.md](CREDITS.md)
+- `assets/img/demo-game.jpg`：开源游戏 SuperTuxKart 截图，CC BY-SA 4.0
 - 字体：`Noto Serif SC`（SIL Open Font License），通过 jsDelivr 加载；加载不到时自动退回系统宋体（宋体 / Songti SC / SimSun）
 
 自己上传的截图不会被保存或上传，只活在你这次浏览器的内存里。

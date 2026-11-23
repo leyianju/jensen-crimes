@@ -1,25 +1,56 @@
 # 素材出处
 
-仓库里自带的两张图都不是我画的，来自 Wikimedia Commons，均为 **CC BY-SA 4.0**。
-分发、修改这些图片时需要保留下面的署名，并以相同协议共享。
+代码是 MIT，但图片各有各的来源和协议，分开记在这里。
 
-## assets/img/jensen.jpg
+## 黄仁勋照片（assets/img/portraits/）
+
+「左图」那一排选的五张，从左到右：
+
+### official.jpg — 官方笑脸照
+
+- 就是原站和大多数新闻里用的那张灰底微笑照，**NVIDIA 官方宣传照**
+- 本项目里的文件是从参考图（原站截图）裁出来的，没有 CC 授权
+- 用途：只作为恶搞二创的素材。**介意版权就把 `assets/portraits.js` 里这一条删掉**，页面会自动少一个选项
+- 商用请务必换成有授权的图
+
+### stanford.jpg — 斯坦福
 
 - 原图：`File:Jensen Huang Stanford 2026-04-30 010 (cropped).jpg`
 - 作者：**Anderseidesvik**
 - 出处：https://commons.wikimedia.org/wiki/File:Jensen_Huang_Stanford_2026-04-30_010_(cropped).jpg
 - 协议：CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/
-- 改动：等比缩放到 900px 宽，转 JPEG
 
-## assets/img/demo-game.jpg
+### closeup.jpg — 侧脸
+
+- 原图：`File:Jensen Huang (cropped) (2024).jpg`
+- 摄影：**Peter Dasilva**（欧盟委员会访问美国期间拍摄）
+- 出处：https://commons.wikimedia.org/wiki/File:Jensen_Huang_(cropped)_(2024).jpg
+- 协议：CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
+
+### stage.jpg — 舞台（SC18）
+
+- 原图：`File:JensenHuangSC18.jpg`
+- 作者：**Raysonho @ Open Grid Scheduler / Scalable Grid Engine**
+- 出处：https://commons.wikimedia.org/wiki/File:JensenHuangSC18.jpg
+- 协议：CC0 1.0（公共领域贡献）
+
+### gesture.jpg — 记者会（CES）
+
+- 原图：`File:Nvidia CEO Jensen Huang gestikuliert.jpg`
+- 作者：**Maurizio Pesce**
+- 出处：https://commons.wikimedia.org/wiki/File:Nvidia_CEO_Jensen_Huang_gestikuliert.jpg
+- 原发布：https://www.flickr.com/photos/pestoverde/34072594183/
+- 协议：CC BY 2.0 — https://creativecommons.org/licenses/by/2.0/
+
+> 除了 official.jpg，其余四张都做了等比缩放和裁剪（只保留人物部分），没有改内容。
+
+## 示例配图（assets/img/demo-game.jpg）
 
 - 原图：`File:SuperTuxKart in-race (2018).png`
 - 截图作者：**QwertyChouskie**；游戏 SuperTuxKart 由 SuperTuxKart 开发组制作
 - 出处：https://commons.wikimedia.org/wiki/File:SuperTuxKart_in-race_(2018).png
-- 协议：CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/
+- 协议：CC BY-SA 4.0
 - 改动：等比缩放到 1200px 宽，转 JPEG
-
-> 这张只是"右图"位置的示例，换成你自己的截图完全没问题，也不影响代码的 MIT 协议。
 
 ## 字体
 
@@ -28,5 +59,6 @@
 
 ## 注意
 
-用默认素材生成的图，因为包含上面两张 CC BY-SA 4.0 的图片，严格来说也应按 CC BY-SA 4.0 共享。
-自己传图的话就以你自己的素材授权为准。
+- 用 CC BY-SA 的图（stanford、demo-game）生成的成品，严格来说也要按 CC BY-SA 共享并署名
+- 用 official.jpg 生成的图，版权风险跟着那张宣传照走，自己拿捏
+- 自己传图的话，以你自己的素材授权为准
