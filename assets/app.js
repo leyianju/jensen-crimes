@@ -8,10 +8,10 @@
 
   var DEFAULTS = {
     label: 'arknights',
-    headline: '英伟达董事会调查发现，CEO黄仁勋玩丝之歌一直到第三幕还在用收割者',
-    quote: '天哪是我们的第七纹章大人',
+    headline: '英伟达董事会调查发现，CEO黄仁勋玩KARDS玩英日压槽',
+    quote: '“我们发现了黄仁勋的KARDS账号，让我们震惊的是，他在这款二战卡牌游戏中，坚持只玩英日压槽卡组”',
     source: '——一位明显受惊的英伟达高管说。',
-    date: 'November 17, 2026',
+    date: 'November 17, 2028',
     imageHeight: 520,
     leftRatio: 0.44,
     headlineSize: 66,
@@ -21,7 +21,7 @@
   };
 
   var DEFAULT_PORTRAIT = 'official';
-  var DEFAULT_RIGHT = 'assets/img/demo-game.jpg';
+  var DEFAULT_RIGHT = 'assets/img/demo-kards.jpg';
   var PORTRAITS = window.PORTRAITS || [];
   var LS_KEY = 'jensen-crimes:v1';
 

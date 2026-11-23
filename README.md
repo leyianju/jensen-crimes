@@ -73,7 +73,7 @@ npx serve .
 - `assets/img/portraits/` 里的 5 张黄仁勋照片：
   - **official.jpg**（官方笑脸照）：NVIDIA 宣传照，沿用原站素材，**仅供恶搞二创**，不适用 CC 协议；介意的话删掉这一条即可
   - 另外 4 张来自 Wikimedia Commons：CC0 / CC BY 2.0 / CC BY 4.0 / CC BY-SA 4.0，作者与出处见 [CREDITS.md](CREDITS.md)
-- `assets/img/demo-game.jpg`：开源游戏 SuperTuxKart 截图，CC BY-SA 4.0
+- `assets/img/demo-kards.jpg`：KARDS 的蒙哥马利（Monty）卡牌原画，**© 1939 Games**，只作为右图示例，换成你自己的截图完全没问题
 - 字体：`Noto Serif SC`（SIL Open Font License），通过 jsDelivr 加载；加载不到时自动退回系统宋体（宋体 / Songti SC / SimSun）
 
 自己上传的截图不会被保存或上传，只活在你这次浏览器的内存里。

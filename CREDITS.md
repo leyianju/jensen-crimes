@@ -44,13 +44,14 @@
 
 > 除了 official.jpg，其余四张都做了等比缩放和裁剪（只保留人物部分），没有改内容。
 
-## 示例配图（assets/img/demo-game.jpg）
+## 示例配图（assets/img/demo-kards.jpg）
 
-- 原图：`File:SuperTuxKart in-race (2018).png`
-- 截图作者：**QwertyChouskie**；游戏 SuperTuxKart 由 SuperTuxKart 开发组制作
-- 出处：https://commons.wikimedia.org/wiki/File:SuperTuxKart_in-race_(2018).png
-- 协议：CC BY-SA 4.0
-- 改动：等比缩放到 1200px 宽，转 JPEG
+- 内容：**KARDS**（1939 Games 的二战卡牌游戏）里的「蒙哥马利 / Monty」卡牌原画
+- 原图：KARDS Wiki 的 `File:T monty.png`（1024×1024）
+- 出处：https://kards.fandom.com/wiki/Monty
+- 版权：卡牌美术归 **1939 Games** 所有，不属于本项目的开源部分
+- 改动：等比缩放到 1100px 宽，转 JPEG
+- 用途：只作为「右图」位置的默认示例，让页面打开就有东西看。**商用或公开发布请换成你自己的截图或获授权素材**
 
 ## 字体
 
@@ -59,6 +60,7 @@
 
 ## 注意
 
-- 用 CC BY-SA 的图（stanford、demo-game）生成的成品，严格来说也要按 CC BY-SA 共享并署名
-- 用 official.jpg 生成的图，版权风险跟着那张宣传照走，自己拿捏
+- 用 `stanford.jpg`（CC BY-SA 4.0）生成的成品，严格来说也要按 CC BY-SA 共享并署名
+- `gesture.jpg`（CC BY 2.0）、`closeup.jpg`（CC BY 4.0）、`stage.jpg`（CC0）分别按各自协议处理
+- 用 official.jpg（NVIDIA 宣传照）或 demo-kards.jpg（1939 Games 卡面）生成的图，版权风险跟着原图走，自己拿捏
 - 自己传图的话，以你自己的素材授权为准
